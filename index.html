@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hydrocarbon and Petrochemical Supply | Euronest Petrochemicals</title>
+  <meta name="description" content="Hydrocarbons and petrochemicals backed by the technical command of the entire chain, from reservoir to market. Upstream, midstream, trading and petrochemicals." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =========================================================
+       TOKENS - EURONEST PETROCHEMICALS
+    ========================================================= */
+    :root {
+      --brand-yellow: #F7D60D;
+      --brand-yellow-hover: #E3C200;
+      --brand-black: #161615;
+      --brand-charcoal: #212120;
+      --brand-slate: #48494D;
+      --brand-light: #F4F4F3;
+      --brand-card-bg: #ECECE9;
+      --brand-white: #FFFFFF;
+      --text-dark: #1A1A19;
+      --text-muted: #5F6064;
+      --text-light-muted: #A4A6AB;
+      --border-dark-subtle: rgba(255, 255, 255, 0.12);
+      --border-light-subtle: rgba(26, 26, 25, 0.14);
+      --font-display: 'DIN Next LT Pro', 'DIN-BlackAlternate', 'Barlow', sans-serif;
+      --font-body: 'DIN Next LT Pro', 'Barlow', sans-serif;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --rail: 300px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--font-body);
+      background: var(--brand-white);
+      color: var(--text-dark);
+      line-height: 1.55;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    .container { width: min(1340px, 92%); margin: 0 auto; }
+    section[id] { scroll-margin-top: 20px; }
+
+    :focus-visible { outline: 2px solid var(--brand-yellow); outline-offset: 3px; }
+
+    /* =========================================================
+       NAV (top bar -> bottom floating dock)
+    ========================================================= */
+    .site-nav {
+      position: fixed; top: 0; left: 0;
+      width: calc(100% - var(--rail));
+      z-index: 1000;
+      padding: 20px 44px;
+      transition: top .45s var(--ease), bottom .45s var(--ease), transform .45s var(--ease),
+                  width .45s var(--ease), background-color .35s ease, padding .35s ease;
+      --logo-cut: var(--brand-light);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+
+    .brand-logo { display: inline-flex; align-items: center; gap: 12px; color: var(--brand-charcoal); }
+    .brand-mark { width: 34px; height: 34px; flex-shrink: 0; }
+    .brand-text { display: flex; flex-direction: column; line-height: 1; }
+    .brand-title { font-family: var(--font-display); font-weight: 800; font-size: 1.05rem; letter-spacing: .08em; }
+    .brand-sub { font-size: .56rem; font-weight: 600; letter-spacing: .24em; margin-top: 3px; opacity: .85; }
+
+    .nav-links { display: flex; align-items: center; gap: 24px; }
+    .nav-link { position: relative; font-size: .84rem; font-weight: 600; color: var(--text-dark); transition: color .25s ease; white-space: nowrap; }
+    .nav-link .dot { position: absolute; top: -2px; right: -7px; width: 4px; height: 4px; background: var(--brand-yellow); opacity: .85; }
+    .nav-link:hover { color: #000; }
+
+    .nav-cta-dock { display: none; }
+
+    .site-nav.is-docked {
+      top: auto; bottom: 22px; left: 50%;
+      transform: translateX(-50%);
+      width: min(820px, 94vw);
+      background: var(--brand-black);
+      color: var(--brand-white);
+      padding: 0 0 0 22px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.38);
+      border: 1px solid rgba(255,255,255,.08);
+      --logo-cut: var(--brand-black);
+    }
+    .site-nav.is-docked .brand-logo { color: var(--brand-white); }
+    .site-nav.is-docked .brand-mark { color: var(--brand-yellow); }
+    .site-nav.is-docked .nav-links { gap: 20px; }
+    .site-nav.is-docked .nav-link { color: rgba(255,255,255,.82); font-size: .82rem; }
+    .site-nav.is-docked .nav-link:hover { color: var(--brand-yellow); }
+    .site-nav.is-docked .hide-docked { display: none; }
+    .site-nav.is-docked .nav-cta-dock {
+      position: relative; display: inline-flex; align-items: center; justify-content: space-between; gap: 18px;
+      height: 54px; padding: 0 20px;
+      background: var(--brand-yellow); color: var(--brand-black);
+      font-weight: 700; font-size: .84rem;
+      transition: background-color .25s ease;
+    }
+    .site-nav.is-docked .nav-cta-dock:hover { background: var(--brand-yellow-hover); }
+    .corner-bracket { width: 12px; height: 12px; border-top: 2px solid var(--brand-black); border-right: 2px solid var(--brand-black); align-self: flex-start; margin-top: 10px; }
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+    .hero-section { background: var(--brand-light); }
+    .hero-top-grid { display: grid; grid-template-columns: 1fr var(--rail); min-height: 560px; }
+    .hero-left-canvas { position: relative; display: flex; flex-direction: column; justify-content: flex-end; padding: 150px 48px 54px; overflow: hidden; }
+    .hero-grid-pattern {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(to right, rgba(26,26,25,.05) 1px, transparent 1px),
+                        linear-gradient(to bottom, rgba(26,26,25,.05) 1px, transparent 1px);
+      background-size: 46px 46px;
+      -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,.65), transparent 85%);
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.65), transparent 85%);
+      pointer-events: none;
+    }
+    .hero-headline-wrap { position: relative; }
+    .eyebrow-line { display: inline-flex; align-items: center; gap: 10px; font-size: .8rem; font-weight: 700; letter-spacing: .06em; color: var(--text-dark); margin-bottom: 16px; }
+    .accent-bar { width: 3px; height: 15px; background: var(--brand-yellow); display: inline-block; flex-shrink: 0; }
+    .hero-title { font-family: var(--font-display); font-size: clamp(3.2rem, 6.6vw, 6rem); font-weight: 700; line-height: 1; letter-spacing: -.02em; color: var(--brand-black); }
+    .hero-title span { color: #6B6D72; font-weight: 600; }
+
+    .text-arrow-link { display: inline-flex; align-items: center; gap: 10px; margin-top: 30px; font-weight: 700; font-size: .92rem; color: var(--brand-black); }
+    .text-arrow-link .arrow-ne { color: var(--brand-black); background: var(--brand-yellow); width: 26px; height: 26px; display: inline-flex; align-items: center; justify-content: center; font-size: .95rem; transition: transform .25s ease; }
+    .text-arrow-link:hover .arrow-ne { transform: translate(3px, -3px); }
+    .text-arrow-link.on-dark { color: var(--brand-white); }
+
+    .hero-right-rail { display: flex; flex-direction: column; }
+    .hero-yellow-cta {
+      position: relative; height: 165px; background: var(--brand-yellow); color: var(--brand-black);
+      padding: 24px; display: flex; flex-direction: column; justify-content: flex-end;
+      font-weight: 700; font-size: 1.1rem; line-height: 1.25; transition: background-color .25s ease;
+    }
+    .hero-yellow-cta:hover { background: var(--brand-yellow-hover); }
+    .corner-bracket-dark { position: absolute; top: 18px; right: 18px; width: 16px; height: 16px; border-top: 2.5px solid var(--brand-black); border-right: 2.5px solid var(--brand-black); }
+    .hero-dark-panel { flex: 1; background: var(--brand-black); color: var(--brand-white); padding: 32px 26px; display: flex; align-items: flex-end; }
+    .hero-rail-desc { font-size: .92rem; line-height: 1.55; color: rgba(255,255,255,.82); }
+
+    .hero-media-banner { position: relative; height: 380px; overflow: hidden; background: var(--brand-charcoal); }
+    .hero-banner-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.12); }
+
+    /* =========================================================
+       SHARED
+    ========================================================= */
+    .section-heading { font-family: var(--font-display); font-size: clamp(2rem, 3.4vw, 2.9rem); font-weight: 700; line-height: 1.12; color: var(--brand-black); }
+    .section-heading span { color: #6B6D72; }
+    .section-heading.white { color: var(--brand-white); }
+    .section-heading.white span { color: rgba(255,255,255,.58); }
+    .section-lead { font-size: 1rem; color: var(--text-muted); max-width: 520px; }
+    .section-lead.light { color: rgba(255,255,255,.8); }
+
+    .btn-yellow {
+      display: inline-flex; align-items: center; justify-content: space-between; gap: 28px;
+      height: 54px; padding: 0 22px; background: var(--brand-yellow); color: var(--brand-black);
+      font-family: inherit; font-weight: 700; font-size: .9rem; border: none; cursor: pointer;
+      transition: background-color .25s ease;
+    }
+    .btn-yellow:hover { background: var(--brand-yellow-hover); }
+
+    .reveal-up { opacity: 0; transform: translateY(36px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .reveal-up.is-visible { opacity: 1; transform: none; }
+
+    /* =========================================================
+       WHAT IS AT STAKE  /  FROM DUBAI  (split with image)
+    ========================================================= */
+    .split-section { background: var(--brand-slate); color: var(--brand-white); padding: 120px 0; }
+    .split-grid { display: grid; grid-template-columns: .92fr 1.08fr; gap: 64px; align-items: center; }
+    .split-grid.reverse { grid-template-columns: 1.08fr .92fr; }
+    .split-title { font-family: var(--font-display); font-size: clamp(2.1rem, 3.5vw, 3rem); line-height: 1.12; font-weight: 700; }
+    .split-title span { color: rgba(255,255,255,.68); }
+    .hatch-divider {
+      height: 22px; margin: 28px 0; border: 1px solid rgba(255,255,255,.16);
+      background: repeating-linear-gradient(-45deg, transparent, transparent 6px, rgba(255,255,255,.08) 6px, rgba(255,255,255,.08) 7px);
+    }
+    .split-paragraph { font-size: 1rem; color: rgba(255,255,255,.86); max-width: 560px; }
+    .split-frame { position: relative; overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.28); }
+    .split-frame img { width: 100%; height: 450px; object-fit: cover; filter: grayscale(100%) contrast(1.08); }
+
+    /* =========================================================
+       VALUE PROPOSITION
+    ========================================================= */
+    .value-section { background: var(--brand-black); color: var(--brand-white); padding: 120px 0 0; }
+    .value-header { display: grid; grid-template-columns: 1.3fr .7fr; gap: 64px; align-items: end; margin-bottom: 64px; }
+    .value-header .section-heading { font-size: clamp(1.8rem, 3vw, 2.6rem); }
+    .value-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--border-dark-subtle); }
+    .pillar-card { padding: 48px 36px 56px; border-right: 1px solid var(--border-dark-subtle); display: flex; flex-direction: column; justify-content: space-between; min-height: 430px; transition: background-color .3s ease; }
+    .pillar-card:last-child { border-right: none; }
+    .pillar-card:hover { background: rgba(255,255,255,.03); }
+    .pillar-graphic { width: 165px; height: 165px; margin: 12px auto 36px; }
+    .pillar-copy h3 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
+    .pillar-copy p { font-size: .92rem; color: var(--text-light-muted); line-height: 1.55; }
+
+    /* =========================================================
+       HOW WE WORK (timeline)
+    ========================================================= */
+    .process-section { background: var(--brand-white); padding: 120px 0; }
+    .process-timeline-wrap { position: relative; display: grid; grid-template-columns: 36px 1fr; gap: 36px; margin-top: 64px; }
+    .process-rail {
+      position: relative; width: 10px;
+      background: repeating-linear-gradient(-45deg, rgba(26,26,25,.14), rgba(26,26,25,.14) 4px, transparent 4px, transparent 8px);
+      border-left: 1px solid rgba(26,26,25,.2); border-right: 1px solid rgba(26,26,25,.2);
+    }
+    .process-rail-fill { position: absolute; top: 0; left: 3px; width: 2px; height: 30%; background: var(--brand-yellow); transition: height .25s ease-out; }
+    .rail-node { position: absolute; left: -2px; width: 12px; height: 12px; background: #C9C9C6; transition: background-color .3s ease; }
+    .rail-node.active { background: var(--brand-yellow); }
+    .process-step { display: grid; grid-template-columns: 1.25fr .75fr; gap: 32px; align-items: start; padding: 36px 0 56px; border-bottom: 1px solid var(--border-light-subtle); }
+    .process-step:last-of-type { border-bottom: none; }
+    .step-title-col h3 { font-family: var(--font-display); font-size: clamp(2rem, 3.8vw, 3.3rem); font-weight: 600; line-height: 1.1; color: var(--brand-black); }
+    .step-num { color: #8F7A00; margin-right: 14px; }
+    .step-desc-col p { font-size: 1rem; color: var(--text-muted); max-width: 340px; }
+    .process-cta { margin-top: 24px; margin-left: 72px; }
+
+    /* =========================================================
+       WHAT YOU GAIN (carousel)
+    ========================================================= */
+    .gain-section { background: var(--brand-light); padding: 110px 0 120px; }
+    .gain-header { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 48px; }
+    .carousel-controls { display: flex; gap: 8px; }
+    .carousel-btn { width: 44px; height: 44px; background: var(--brand-white); border: 1px solid var(--border-light-subtle); color: var(--brand-black); font-size: 1.3rem; cursor: pointer; transition: background .25s ease; }
+    .carousel-btn:hover { background: var(--brand-yellow); }
+    .gain-track-wrap { overflow-x: auto; scrollbar-width: none; scroll-snap-type: x mandatory; }
+    .gain-track-wrap::-webkit-scrollbar { display: none; }
+    .gain-track { display: grid; grid-auto-flow: column; grid-auto-columns: minmax(300px, 340px); gap: 20px; padding-left: max(4%, calc((100vw - 1340px) / 2)); padding-right: 4%; }
+    .gain-card { scroll-snap-align: start; background: var(--brand-white); border-top: 3px solid var(--brand-yellow); padding: 32px 30px 40px; min-height: 280px; display: flex; flex-direction: column; justify-content: space-between; gap: 40px; transition: box-shadow .35s ease; }
+    .gain-card:hover { box-shadow: 0 22px 48px rgba(0,0,0,.09); }
+    .gain-icon { width: 40px; height: 40px; background: var(--brand-yellow); display: inline-flex; align-items: center; justify-content: center; color: var(--brand-black); }
+    .gain-card h3 { font-family: var(--font-display); font-size: 1.35rem; line-height: 1.2; font-weight: 700; margin-bottom: 10px; }
+    .gain-card p { font-size: .94rem; color: var(--text-muted); }
+
+    /* =========================================================
+       BUSINESS UNITS
+    ========================================================= */
+    .units-section { background: var(--brand-white); padding: 110px 0 130px; }
+    .units-header { margin-bottom: 48px; }
+    .services-stack { display: flex; flex-direction: column; gap: 28px; }
+    .service-card-row {
+      display: grid; grid-template-columns: 1fr 1.05fr; background: var(--brand-card-bg);
+      border-top: 1px solid rgba(26,26,25,.1); min-height: 380px;
+      opacity: 0; transform: translateY(72px);
+      transition: opacity .75s var(--ease), transform .75s var(--ease), box-shadow .35s ease;
+    }
+    .service-card-row.is-visible { opacity: 1; transform: none; }
+    .service-card-row:hover { box-shadow: 0 22px 48px rgba(0,0,0,.09); }
+    .service-card-info { padding: 40px; display: flex; flex-direction: column; justify-content: space-between; gap: 36px; }
+    .service-card-title { font-family: var(--font-display); font-size: clamp(1.7rem, 2.6vw, 2.3rem); font-weight: 700; line-height: 1.15; color: var(--brand-black); margin-bottom: 14px; }
+    .service-card-desc { font-size: 1rem; color: var(--text-muted); max-width: 440px; }
+    .service-card-link { display: inline-flex; align-items: center; gap: 14px; font-weight: 700; font-size: .92rem; color: var(--brand-black); }
+    .service-arrow-btn { width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; background: var(--brand-yellow); transition: transform .25s ease; }
+    .service-card-row:hover .service-arrow-btn { transform: translate(3px, -3px); }
+    .service-card-media { position: relative; overflow: hidden; background: var(--brand-charcoal); }
+    .service-card-media img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.1); transition: transform .7s var(--ease); }
+    .service-card-row:hover .service-card-media img { transform: scale(1.04); }
+
+    /* =========================================================
+       PRODUCT PORTFOLIO
+    ========================================================= */
+    .portfolio-section { background: var(--brand-black); color: var(--brand-white); padding: 110px 0 120px; }
+    .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 56px; border-top: 1px solid var(--border-dark-subtle); border-left: 1px solid var(--border-dark-subtle); }
+    .portfolio-item { padding: 40px 32px 44px; border-right: 1px solid var(--border-dark-subtle); border-bottom: 1px solid var(--border-dark-subtle); font-size: 1.1rem; line-height: 1.4; color: var(--text-light-muted); transition: background-color .3s ease; position: relative; }
+    .portfolio-item::before { content: ""; display: block; width: 10px; height: 10px; background: var(--brand-yellow); margin-bottom: 28px; }
+    .portfolio-item:hover { background: rgba(255,255,255,.03); }
+    .portfolio-item strong { display: inline; color: var(--brand-white); font-family: var(--font-display); font-weight: 700; }
+
+    /* =========================================================
+       COMPLIANCE
+    ========================================================= */
+    .compliance-section { background: var(--brand-light); padding: 110px 0; }
+    .compliance-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 64px; align-items: end; }
+    .compliance-grid .section-lead { color: var(--text-dark); font-size: 1.05rem; max-width: 520px; }
+
+    /* =========================================================
+       FAQ
+    ========================================================= */
+    .faq-section { background: var(--brand-white); padding: 120px 0; }
+    .faq-grid { display: grid; grid-template-columns: .72fr 1.28fr; gap: 56px; align-items: start; }
+    .faq-list { display: flex; flex-direction: column; }
+    .faq-item { position: relative; border-top: 1px solid var(--border-light-subtle); }
+    .faq-item:last-child { border-bottom: 1px solid var(--border-light-subtle); }
+    .faq-item::before, .faq-item::after { content: ""; position: absolute; width: 8px; height: 8px; border-color: rgba(26,26,25,.45); border-style: solid; pointer-events: none; }
+    .faq-item::before { top: -1px; left: 0; border-width: 1.5px 0 0 1.5px; }
+    .faq-item::after { top: -1px; right: 0; border-width: 1.5px 1.5px 0 0; }
+    .faq-question { width: 100%; background: none; border: none; padding: 26px 22px; display: flex; justify-content: space-between; align-items: center; gap: 20px; text-align: left; font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--brand-black); cursor: pointer; }
+    .faq-item.active .faq-question { color: #8F7A00; }
+    .faq-plus { font-size: 1.4rem; font-weight: 400; transition: transform .3s ease; }
+    .faq-item.active .faq-plus { transform: rotate(45deg); color: #8F7A00; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .35s var(--ease); }
+    .faq-item.active .faq-answer { max-height: 260px; }
+    .faq-answer p { padding: 0 22px 26px; font-size: .96rem; color: var(--text-muted); max-width: 640px; }
+
+    /* =========================================================
+       CLOSING + CONTACT FORM
+    ========================================================= */
+    .cta-banner-section { background: var(--brand-yellow); color: var(--brand-black); padding: 84px 0; }
+    .cta-banner-inner { display: grid; grid-template-columns: .85fr 1.15fr; gap: 56px; align-items: start; }
+    .cta-banner-title { font-family: var(--font-display); font-size: clamp(2.3rem, 4vw, 3.5rem); font-weight: 700; line-height: 1.06; }
+    .cta-banner-sub { margin-top: 16px; font-size: 1.02rem; font-weight: 500; max-width: 440px; }
+    .quick-contact-form { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .quick-contact-form input, .quick-contact-form select {
+      width: 100%; height: 50px; padding: 0 16px; background: rgba(255,255,255,.92);
+      border: 1px solid rgba(22,22,21,.25); font-family: inherit; font-size: .92rem; color: var(--brand-black);
+    }
+    .quick-contact-form input::placeholder { color: #55564F; }
+    .btn-dark-submit { height: 50px; padding: 0 20px; background: var(--brand-black); color: var(--brand-white); border: none; font-family: inherit; font-weight: 700; font-size: .9rem; display: inline-flex; align-items: center; justify-content: space-between; cursor: pointer; transition: background-color .25s ease; }
+    .btn-dark-submit:hover { background: #2E2E2C; }
+    .form-feedback { grid-column: 1 / -1; font-size: .9rem; font-weight: 700; min-height: 22px; }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+    .site-footer { background: var(--brand-black); color: var(--brand-white); padding: 84px 0 36px; }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr .8fr .8fr 1fr; gap: 44px; padding-bottom: 64px; border-bottom: 1px solid var(--border-dark-subtle); }
+    .footer-logo { color: var(--brand-white); }
+    .footer-tagline { margin-top: 18px; font-size: .95rem; color: var(--text-light-muted); }
+    .back-to-top { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; margin-top: 28px; background: rgba(255,255,255,.06); border: 1px solid var(--border-dark-subtle); color: var(--brand-white); transition: background .25s ease, color .25s ease; }
+    .back-to-top:hover { background: var(--brand-yellow); color: var(--brand-black); }
+    .footer-links-col ul { display: flex; flex-direction: column; gap: 12px; }
+    .footer-links-col a { font-size: .92rem; font-weight: 600; color: var(--brand-white); transition: color .2s ease; }
+    .footer-links-col a:hover { color: var(--brand-yellow); }
+    .footer-address { font-size: .92rem; color: var(--text-light-muted); }
+    .footer-bottom { padding-top: 28px; font-size: .82rem; color: var(--text-light-muted); }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+    @media (max-width: 1280px) { .nav-unit { display: none; } }
+
+    @media (max-width: 1024px) {
+      .site-nav { width: 100%; padding: 16px 24px; }
+      .hero-top-grid, .split-grid, .split-grid.reverse, .service-card-row, .faq-grid, .cta-banner-inner, .value-header, .compliance-grid { grid-template-columns: 1fr; }
+      .value-header, .compliance-grid { gap: 24px; }
+      .hero-right-rail { flex-direction: row; }
+      .hero-yellow-cta { width: 240px; height: auto; flex-shrink: 0; }
+      .hero-dark-panel { align-items: center; }
+      .service-card-media { min-height: 280px; }
+      .value-grid { grid-template-columns: 1fr; }
+      .pillar-card { border-right: none; border-bottom: 1px solid var(--border-dark-subtle); min-height: 0; }
+      .portfolio-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .split-grid.reverse .split-frame { order: 2; }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links { display: none; }
+      .site-nav.is-docked { width: calc(100% - 24px); bottom: 12px; padding-left: 14px; }
+      .site-nav.is-docked .nav-cta-dock { height: 46px; padding: 0 14px; font-size: .78rem; }
+      .hero-left-canvas { padding: 110px 24px 36px; }
+      .hero-right-rail { flex-direction: column; }
+      .hero-yellow-cta { width: 100%; height: 110px; }
+      .process-step, .footer-grid, .quick-contact-form, .portfolio-grid { grid-template-columns: 1fr; }
+      .process-cta { margin-left: 0; }
+      .gain-header { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal-up, .service-card-row { opacity: 1; transform: none; transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <header class="site-nav" id="siteNav" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#home" class="brand-logo" aria-label="Euronest Petrochemicals">
+        <svg class="brand-mark" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="48" fill="currentColor" />
+          <path d="M50 42C44 26 32 14 16 8L11 15C25 21 36 33 41 49L50 58L59 49C64 33 75 21 89 15L84 8C68 14 56 26 50 42Z" fill="var(--logo-cut)" />
+          <path d="M50 62C42 46 28 34 10 28L6 36C22 42 35 53 42 69L50 77L58 69C65 53 78 42 94 36L90 28C72 34 58 46 50 62Z" fill="var(--logo-cut)" />
+          <path d="M50 82C41 68 27 57 12 52L9 60C23 65 35 75 43 90L50 96L57 90C65 75 77 65 91 60L88 52C73 57 59 68 50 82Z" fill="var(--logo-cut)" />
+        </svg>
+        <div class="brand-text">
+          <span class="brand-title">EURONEST</span>
+          <span class="brand-sub">PETROCHEMICALS</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="upstream-services.html" class="nav-link nav-unit hide-docked">Upstream Services<span class="dot"></span></a>
+        <a href="midstream-supply.html" class="nav-link nav-unit hide-docked">Midstream &amp; Supply<span class="dot"></span></a>
+        <a href="trading-market-access.html" class="nav-link nav-unit hide-docked">Trading &amp; Market Access<span class="dot"></span></a>
+        <a href="petrochemicals.html" class="nav-link nav-unit hide-docked">Petrochemicals<span class="dot"></span></a>
+        <a href="compliance-risk-management.html" class="nav-link">Compliance<span class="dot"></span></a>
+        <a href="about-us.html" class="nav-link">About Us<span class="dot"></span></a>
+        <a href="#contact" class="nav-link hide-docked">Contact<span class="dot"></span></a>
+      </nav>
+
+      <a href="#contact" class="nav-cta-dock">
+        <span>Talk to our commercial team</span>
+        <span class="corner-bracket"></span>
+      </a>
+    </div>
+  </header>
+
+  <main id="home">
+
+    <!-- 1. HEADER -->
+    <section class="hero-section">
+      <div class="hero-top-grid">
+        <div class="hero-left-canvas">
+          <div class="hero-grid-pattern" aria-hidden="true"></div>
+          <div class="hero-headline-wrap reveal-up">
+            <div class="eyebrow-line">
+              <span class="accent-bar"></span>
+              <span>HYDROCARBONS · PETROCHEMICALS · UPSTREAM · MIDSTREAM</span>
+            </div>
+            <h1 class="hero-title">
+              Energy <br />
+              <span>with certainty.</span>
+            </h1>
+            <a href="#portfolio" class="text-arrow-link">
+              <span>Explore our portfolio</span>
+              <span class="arrow-ne">↗</span>
+            </a>
+          </div>
+        </div>
+
+        <aside class="hero-right-rail">
+          <a href="#contact" class="hero-yellow-cta">
+            <span class="corner-bracket-dark"></span>
+            <span>Talk to our commercial team</span>
+          </a>
+          <div class="hero-dark-panel">
+            <p class="hero-rail-desc">Euronest Petrochemicals secures the supply of hydrocarbons and petrochemicals with technical precision, so every operation is delivered as agreed.</p>
+          </div>
+        </aside>
+      </div>
+
+      <div class="hero-media-banner">
+        <img src="https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?auto=format&fit=crop&w=1800&q=85" alt="Petrochemical infrastructure and refinery" class="hero-banner-img" />
+      </div>
+    </section>
+
+    <!-- 2. WHAT IS AT STAKE -->
+    <section class="split-section" id="at-stake">
+      <div class="container split-grid">
+        <div class="reveal-up">
+          <h2 class="split-title">
+            A single deviation is enough <br />
+            <span>to stop an entire operation.</span>
+          </h2>
+          <div class="hatch-divider" aria-hidden="true"></div>
+          <p class="split-paragraph">An off-spec cargo. A delay that leaves a plant without feedstock. A supplier that fails an audit. In energy, every deviation has a cost, and the person who answers to the company is the one responsible for supply.</p>
+        </div>
+        <div class="reveal-up" data-delay="150">
+          <div class="split-frame">
+            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1400&q=85" alt="Industrial operations and technical team" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. VALUE PROPOSITION -->
+    <section class="value-section" id="value">
+      <div class="container value-header">
+        <h2 class="section-heading white reveal-up">
+          Hydrocarbons and petrochemicals backed by the technical command of the entire chain, <span>from reservoir to market.</span>
+        </h2>
+        <p class="section-lead light reveal-up">The specialized partner that secures the buyer’s operational continuity and ensures every commitment is delivered exactly as agreed.</p>
+      </div>
+
+      <div class="container">
+        <div class="value-grid">
+          <div class="pillar-card">
+            <div class="pillar-graphic">
+              <svg viewBox="0 0 180 180" fill="none">
+                <circle cx="90" cy="90" r="68" stroke="rgba(255,255,255,0.16)" stroke-width="1.2" stroke-dasharray="4 4"/>
+                <path d="M90 22A68 68 0 0 1 158 90" stroke="#F7D60D" stroke-width="1.6"/>
+                <circle cx="90" cy="90" r="34" stroke="#F7D60D" stroke-width="1.5"/>
+                <circle cx="90" cy="90" r="14" stroke="rgba(255,255,255,0.3)" stroke-width="1.2"/>
+                <path d="M90 46V56M90 124V134M46 90H56M124 90H134" stroke="#F7D60D" stroke-width="2"/>
+              </svg>
+            </div>
+            <div class="pillar-copy">
+              <h3>Technical judgment in every operation</h3>
+              <p>We understand each product from its origin: specification, behavior and logistics, so we anticipate what a conventional supplier misses.</p>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-graphic">
+              <svg viewBox="0 0 180 180" fill="none">
+                <path d="M35 125C55 145 125 145 145 125" stroke="rgba(255,255,255,0.16)" stroke-width="1.2"/>
+                <rect x="46" y="102" width="16" height="28" stroke="rgba(255,255,255,0.28)" stroke-width="1.2"/>
+                <rect x="70" y="84" width="16" height="46" stroke="rgba(255,255,255,0.28)" stroke-width="1.2"/>
+                <rect x="94" y="66" width="16" height="64" stroke="rgba(255,255,255,0.28)" stroke-width="1.2"/>
+                <rect x="118" y="48" width="16" height="82" stroke="rgba(255,255,255,0.28)" stroke-width="1.2"/>
+                <path d="M40 106Q90 92 136 38" stroke="#F7D60D" stroke-width="1.8" fill="none"/>
+                <path d="M126 38H136V48" stroke="#F7D60D" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <div class="pillar-copy">
+              <h3>Verified trading partners</h3>
+              <p>Auditable processes and follow-up through delivery, so you can commit to your company with full confidence.</p>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <div class="pillar-graphic">
+              <svg viewBox="0 0 180 180" fill="none">
+                <path d="M120 35A65 65 0 0 1 120 145" stroke="#F7D60D" stroke-width="1.6"/>
+                <line x1="35" y1="74" x2="112" y2="74" stroke="rgba(255,255,255,0.28)" stroke-width="1.2"/>
+                <line x1="25" y1="90" x2="128" y2="90" stroke="rgba(255,255,255,0.45)" stroke-width="1.4"/>
+                <line x1="35" y1="106" x2="112" y2="106" stroke="rgba(255,255,255,0.28)" stroke-width="1.2"/>
+                <path d="M116 78L128 90L116 102" stroke="#F7D60D" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <div class="pillar-copy">
+              <h3>Predictable supply</h3>
+              <p>Predictability as a non-negotiable standard, from the asset that produces to the market that consumes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. HOW WE WORK -->
+    <section class="process-section" id="how">
+      <div class="container">
+        <div class="reveal-up">
+          <h2 class="section-heading">
+            Three steps to deliver <br />
+            <span>every operation as agreed.</span>
+          </h2>
+        </div>
+
+        <div class="process-timeline-wrap">
+          <div class="process-rail" aria-hidden="true">
+            <div class="process-rail-fill" id="processRailFill"></div>
+            <span class="rail-node active" style="top: 8%"></span>
+            <span class="rail-node" style="top: 46%"></span>
+            <span class="rail-node" style="top: 84%"></span>
+          </div>
+
+          <div class="process-steps">
+            <div class="process-step reveal-up">
+              <div class="step-title-col"><h3><span class="step-num">1.</span>We define the requirement</h3></div>
+              <div class="step-desc-col"><p>Product, specification, volume, timing and delivery terms.</p></div>
+            </div>
+            <div class="process-step reveal-up">
+              <div class="step-title-col"><h3><span class="step-num">2.</span>We structure the operation</h3></div>
+              <div class="step-desc-col"><p>Verified trading partners, coordinated logistics and documentation prepared before the first movement.</p></div>
+            </div>
+            <div class="process-step reveal-up">
+              <div class="step-title-col"><h3><span class="step-num">3.</span>We execute and verify</h3></div>
+              <div class="step-desc-col"><p>Quality control, cargo tracking and complete documentation through delivery.</p></div>
+            </div>
+            <a href="#contact" class="btn-yellow process-cta">
+              <span>Talk to our commercial team</span>
+              <span>↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. WHAT YOU GAIN -->
+    <section class="gain-section" id="gain">
+      <div class="container gain-header">
+        <h2 class="section-heading">
+          What changes when <br />
+          <span>every operation is delivered as agreed.</span>
+        </h2>
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="prevGain" aria-label="Previous">‹</button>
+          <button class="carousel-btn" id="nextGain" aria-label="Next">›</button>
+        </div>
+      </div>
+
+      <div class="gain-track-wrap" id="gainWrap">
+        <div class="gain-track">
+          <article class="gain-card">
+            <span class="gain-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/></svg></span>
+            <div><h3>Plants that run without interruption</h3><p>Feedstock arrives on the schedule your production requires.</p></div>
+          </article>
+          <article class="gain-card">
+            <span class="gain-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/></svg></span>
+            <div><h3>Cargoes accepted the first time</h3><p>Specifications verified before every shipment.</p></div>
+          </article>
+          <article class="gain-card">
+            <span class="gain-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/></svg></span>
+            <div><h3>Audits without surprises</h3><p>Every operation backed by complete, traceable documentation.</p></div>
+          </article>
+          <article class="gain-card">
+            <span class="gain-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/></svg></span>
+            <div><h3>Planning based on certain data</h3><p>Timing and volumes your team can commit to.</p></div>
+          </article>
+          <article class="gain-card">
+            <span class="gain-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/></svg></span>
+            <div><h3>Assets that produce more</h3><p>Fields and wells assessed and optimized with technical rigor.</p></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. BUSINESS UNITS -->
+    <section class="units-section" id="units">
+      <div class="container">
+        <div class="units-header">
+          <h2 class="section-heading">
+            Four business units. <span>One standard of delivery.</span>
+          </h2>
+        </div>
+
+        <div class="services-stack" id="servicesStack">
+          <article class="service-card-row" data-service-card>
+            <div class="service-card-info">
+              <div>
+                <h3 class="service-card-title">Upstream Services</h3>
+                <p class="service-card-desc">Well reactivation, mature field re-engineering, reservoir characterization and enhanced oil recovery.</p>
+              </div>
+              <a href="upstream-services.html" class="service-card-link">
+                <span class="service-arrow-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/></svg></span>
+                <span>View Upstream Services</span>
+              </a>
+            </div>
+            <div class="service-card-media">
+              <img src="https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=1200&q=85" alt="Upstream extraction and well optimization" />
+            </div>
+          </article>
+
+          <article class="service-card-row" data-service-card>
+            <div class="service-card-info">
+              <div>
+                <h3 class="service-card-title">Midstream &amp; Supply</h3>
+                <p class="service-card-desc">Surface facilities and fluid management, hydrocarbon logistics and procurement of equipment and materials.</p>
+              </div>
+              <a href="midstream-supply.html" class="service-card-link">
+                <span class="service-arrow-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/></svg></span>
+                <span>View Midstream &amp; Supply</span>
+              </a>
+            </div>
+            <div class="service-card-media">
+              <img src="https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=1200&q=85" alt="Tanker vessel and midstream logistics" />
+            </div>
+          </article>
+
+          <article class="service-card-row" data-service-card>
+            <div class="service-card-info">
+              <div>
+                <h3 class="service-card-title">Trading &amp; Market Access</h3>
+                <p class="service-card-desc">Trading of crude oil, refined products and natural gas, and development of new markets.</p>
+              </div>
+              <a href="trading-market-access.html" class="service-card-link">
+                <span class="service-arrow-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/></svg></span>
+                <span>View Trading &amp; Market Access</span>
+              </a>
+            </div>
+            <div class="service-card-media">
+              <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce?auto=format&fit=crop&w=1200&q=85" alt="Storage terminal and energy trading" />
+            </div>
+          </article>
+
+          <article class="service-card-row" data-service-card>
+            <div class="service-card-info">
+              <div>
+                <h3 class="service-card-title">Petrochemicals</h3>
+                <p class="service-card-desc">Petrochemical feedstocks, polymers, methanol, aromatics and refinery by-products.</p>
+              </div>
+              <a href="petrochemicals.html" class="service-card-link">
+                <span class="service-arrow-btn"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M7 17L17 7M17 7H8M17 7V16" stroke="currentColor" stroke-width="2.5" stroke-linecap="square"/></svg></span>
+                <span>View Petrochemicals</span>
+              </a>
+            </div>
+            <div class="service-card-media">
+              <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=1200&q=85" alt="Petrochemicals, polymers and quality control" />
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. PRODUCT PORTFOLIO -->
+    <section class="portfolio-section" id="portfolio">
+      <div class="container">
+        <h2 class="section-heading white reveal-up">The products we trade.</h2>
+        <ul class="portfolio-grid">
+          <li class="portfolio-item"><strong>Crude oil:</strong> light, heavy and extra-heavy grades</li>
+          <li class="portfolio-item"><strong>Refined products:</strong> diesel, fuel oil, naphtha and jet fuel</li>
+          <li class="portfolio-item"><strong>Gas:</strong> LNG and LPG</li>
+          <li class="portfolio-item"><strong>Petrochemicals:</strong> polymers, methanol and aromatics</li>
+          <li class="portfolio-item"><strong>By-products:</strong> sulphur, petroleum coke, bitumen and base oils</li>
+          <li class="portfolio-item"><strong>Biofuels</strong> and renewable blends</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 8. COMPLIANCE -->
+    <section class="compliance-section" id="compliance">
+      <div class="container compliance-grid">
+        <h2 class="section-heading reveal-up">Every operation, <span>secured before it moves.</span></h2>
+        <div class="reveal-up" data-delay="120">
+          <p class="section-lead">We verify every trading partner, prepare complete documentation for every cargo and manage the financial, currency and geopolitical risk of every transaction.</p>
+          <a href="compliance-risk-management.html" class="text-arrow-link">
+            <span>View Compliance &amp; Risk Management</span>
+            <span class="arrow-ne">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. FROM DUBAI -->
+    <section class="split-section" id="dubai">
+      <div class="container split-grid reverse">
+        <div class="reveal-up">
+          <div class="split-frame">
+            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1400&q=85" alt="Dubai skyline" />
+          </div>
+        </div>
+        <div class="reveal-up" data-delay="150">
+          <h2 class="split-title">
+            Where the energy flows <br />
+            <span>of four regions converge.</span>
+          </h2>
+          <div class="hatch-divider" aria-hidden="true"></div>
+          <p class="split-paragraph">From Dubai, the meeting point of the Middle East, Africa, Asia and Europe, we structure every operation with technical and commercial rigor. Our purpose is to bring certainty to the movement of energy, from resource to market.</p>
+          <a href="about-us.html" class="text-arrow-link on-dark">
+            <span>About Euronest</span>
+            <span class="arrow-ne">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 11. FAQ -->
+    <section class="faq-section" id="faq">
+      <div class="container faq-grid">
+        <div class="reveal-up">
+          <h2 class="section-heading">
+            Frequently <br />
+            <span>asked questions</span>
+          </h2>
+        </div>
+
+        <div class="faq-list" id="faqList">
+          <div class="faq-item active">
+            <button class="faq-question" aria-expanded="true">
+              <span>What products does Euronest trade?</span>
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-answer"><p>Light, heavy and extra-heavy crude oil; refined products such as diesel, fuel oil, naphtha and jet fuel; LNG and LPG; petrochemical feedstocks and products; refinery by-products and biofuels.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>How do you verify your trading partners?</span>
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-answer"><p>Every trading partner goes through a KYC and due diligence process before any operation.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>What documentation do I receive with each operation?</span>
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-answer"><p>Certificates of quality and quantity, shipping documents, certificate of origin and safety data sheets (SDS) where the product requires them.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>Can you handle technical and commercial requirements together?</span>
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-answer"><p>Yes. Our four business units cover everything from asset optimization to product trading.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>How do I start an operation?</span>
+              <span class="faq-plus">+</span>
+            </button>
+            <div class="faq-answer"><p>Send us your requirement through the form. Our commercial team will contact you to define product, specification, volume and timing.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. CLOSING AND CONTACT -->
+    <section class="cta-banner-section" id="contact">
+      <div class="container cta-banner-inner">
+        <div>
+          <h2 class="cta-banner-title">Energy with certainty.</h2>
+          <p class="cta-banner-sub">Every operation, delivered as agreed, backed by the technical command of the entire chain.</p>
+        </div>
+
+        <form class="quick-contact-form" id="contactForm">
+          <input type="text" name="name" placeholder="Name" aria-label="Name" required />
+          <input type="text" name="company" placeholder="Company" aria-label="Company" required />
+          <input type="text" name="position" placeholder="Position" aria-label="Position" required />
+          <input type="text" name="country" placeholder="Country" aria-label="Country" required />
+          <select name="unit" aria-label="Business unit of interest" required>
+            <option value="" disabled selected>Business unit of interest</option>
+            <option>Upstream Services</option>
+            <option>Midstream &amp; Supply</option>
+            <option>Trading &amp; Market Access</option>
+            <option>Petrochemicals</option>
+          </select>
+          <input type="text" name="product" placeholder="Product or service required" aria-label="Product or service required" required />
+          <input type="text" name="volume" placeholder="Estimated volume (optional)" aria-label="Estimated volume (optional)" />
+          <input type="email" name="email" placeholder="Email" aria-label="Email" required />
+          <input type="tel" name="phone" placeholder="Phone" aria-label="Phone" required />
+          <button type="submit" class="btn-dark-submit">
+            <span>Submit requirement</span>
+            <span>↗</span>
+          </button>
+          <p class="form-feedback" id="formFeedback" role="status"></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand-col">
+        <a href="#home" class="brand-logo footer-logo" aria-label="Euronest Petrochemicals">
+          <svg class="brand-mark" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="48" fill="#F7D60D" />
+            <path d="M50 42C44 26 32 14 16 8L11 15C25 21 36 33 41 49L50 58L59 49C64 33 75 21 89 15L84 8C68 14 56 26 50 42Z" fill="#212120" />
+            <path d="M50 62C42 46 28 34 10 28L6 36C22 42 35 53 42 69L50 77L58 69C65 53 78 42 94 36L90 28C72 34 58 46 50 62Z" fill="#212120" />
+            <path d="M50 82C41 68 27 57 12 52L9 60C23 65 35 75 43 90L50 96L57 90C65 75 77 65 91 60L88 52C73 57 59 68 50 82Z" fill="#212120" />
+          </svg>
+          <div class="brand-text">
+            <span class="brand-title">EURONEST</span>
+            <span class="brand-sub">PETROCHEMICALS</span>
+          </div>
+        </a>
+        <p class="footer-tagline">Energy with certainty.</p>
+        <a href="#home" class="back-to-top" aria-label="Back to top">↑</a>
+      </div>
+
+      <div class="footer-links-col">
+        <ul>
+          <li><a href="upstream-services.html">Upstream Services</a></li>
+          <li><a href="midstream-supply.html">Midstream &amp; Supply</a></li>
+          <li><a href="trading-market-access.html">Trading &amp; Market Access</a></li>
+          <li><a href="petrochemicals.html">Petrochemicals</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links-col">
+        <ul>
+          <li><a href="compliance-risk-management.html">Compliance</a></li>
+          <li><a href="about-us.html">About Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="footer-address">Dubai, United Arab Emirates</p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <span>© 2026 Euronest Petrochemicals</span>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const siteNav = document.getElementById('siteNav');
+      const heroSection = document.querySelector('.hero-section');
+      const serviceCards = document.querySelectorAll('[data-service-card]');
+      const revealElements = document.querySelectorAll('.reveal-up');
+      const faqItems = document.querySelectorAll('.faq-item');
+      const processSection = document.getElementById('how');
+      const processRailFill = document.getElementById('processRailFill');
+      const railNodes = document.querySelectorAll('.rail-node');
+
+      /* 1. Nav: top bar -> bottom dock on scroll */
+      const handleNavbarPosition = () => {
+        const triggerPoint = heroSection ? heroSection.offsetHeight * 0.42 : 340;
+        siteNav.classList.toggle('is-docked', window.scrollY > triggerPoint);
+      };
+      window.addEventListener('scroll', handleNavbarPosition, { passive: true });
+      handleNavbarPosition();
+
+      /* 2. Business unit cards: rise one by one */
+      const serviceObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const card = entry.target;
+            const index = Array.from(serviceCards).indexOf(card);
+            card.style.transitionDelay = `${index * 140}ms`;
+            card.classList.add('is-visible');
+            serviceObserver.unobserve(card);
+          }
+        });
+      }, { threshold: 0.16, rootMargin: '0px 0px -60px 0px' });
+      serviceCards.forEach((card) => serviceObserver.observe(card));
+
+      /* 3. General reveal */
+      const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.getAttribute('data-delay') || 0;
+            entry.target.style.transitionDelay = `${delay}ms`;
+            entry.target.classList.add('is-visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      revealElements.forEach((el) => revealObserver.observe(el));
+
+      /* 4. Vertical progress rail in "How we work" */
+      const updateProcessTimeline = () => {
+        if (!processSection || !processRailFill) return;
+        const rect = processSection.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const totalScrollable = rect.height - windowHeight * 0.35;
+        if (totalScrollable <= 0) return;
+        const scrolled = Math.min(Math.max(windowHeight * 0.6 - rect.top, 0), totalScrollable);
+        const pct = Math.round((scrolled / totalScrollable) * 100);
+        processRailFill.style.height = `${Math.max(12, pct)}%`;
+        railNodes.forEach((node, idx) => {
+          const threshold = idx === 0 ? 10 : idx === 1 ? 45 : 80;
+          node.classList.toggle('active', pct >= threshold);
+        });
+      };
+      window.addEventListener('scroll', updateProcessTimeline, { passive: true });
+      updateProcessTimeline();
+
+      /* 5. "What you gain" carousel */
+      const gainWrap = document.getElementById('gainWrap');
+      document.getElementById('prevGain')?.addEventListener('click', () => gainWrap.scrollBy({ left: -360, behavior: 'smooth' }));
+      document.getElementById('nextGain')?.addEventListener('click', () => gainWrap.scrollBy({ left: 360, behavior: 'smooth' }));
+
+      /* 6. FAQ accordion */
+      faqItems.forEach((item) => {
+        const btn = item.querySelector('.faq-question');
+        btn.addEventListener('click', () => {
+          const isOpen = item.classList.contains('active');
+          faqItems.forEach((other) => {
+            other.classList.remove('active');
+            other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+          });
+          if (!isOpen) {
+            item.classList.add('active');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+
+      /* 7. Contact form */
+      const contactForm = document.getElementById('contactForm');
+      const formFeedback = document.getElementById('formFeedback');
+      contactForm?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        formFeedback.textContent = 'We have received your requirement. Our commercial team will contact you to define the details of the operation.';
+        contactForm.reset();
+      });
+    });
+  </script>
+</body>
+</html>
